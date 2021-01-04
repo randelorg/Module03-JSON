@@ -26,10 +26,12 @@ Route::group(['middleware' => ['web']], function () {
         echo  "$count tasks successfully generated .. <br>";
     });
 
-    /*returning the json format from database*/
-    Route::get('/getTask/{task}', function ($task){
-        $theTask = \App\Task::find($task);
-        echo json_decode($theTask);
+    /**
+     *returning the json format from database
+     */
+    Route::get('/getTask/{task_id}', function ($task_id){
+        $theTask = \App\Task::find($task_id);
+        echo json_encode($theTask);
     });
 
     /**
