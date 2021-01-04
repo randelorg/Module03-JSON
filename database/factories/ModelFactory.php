@@ -10,9 +10,13 @@
 | database. Just tell the factory how a default model should look.
 |
 */
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-$factory->define(App\Task::class, function (Faker\Generator $faker) {
+use App\Task;
+use Faker\Generator as Faker;
+
+$factory->define(Task::class, function (Faker $faker) {
     return [
-        'name' => $faker->title,
+        'name' => $faker->unique()->userAgent,
     ];
 });

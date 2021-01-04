@@ -13,8 +13,25 @@
 
 use App\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['web']], function () {
+
+    /**
+     * create a randomize task
+     */
+    Route::get('/generateTask/{count}', function ($count){
+        echo "Generating $count task via factory .. <br>";
+        factory(\App\Task::class) -> times ($count) -> create();
+        echo  "$count tasks successfully generated .. <br>";
+    });
+
+    /*returning the json format from database*/
+    Route::get('/getTask/{task}', function ($task){
+        $theTask = \App\Task::find($task);
+        echo json_decode($theTask);
+    });
+
     /**
      * Show Task Dashboard
      */
@@ -53,4 +70,7 @@ Route::group(['middleware' => ['web']], function () {
 
         return redirect('/');
     });
+
+
+
 });
